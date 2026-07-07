@@ -9,8 +9,86 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as RhRouteImport } from './routes/rh'
+import { Route as RelatoriosRouteImport } from './routes/relatorios'
+import { Route as ProdutosRouteImport } from './routes/produtos'
+import { Route as PontoRouteImport } from './routes/ponto'
+import { Route as PixRouteImport } from './routes/pix'
+import { Route as PedidosRouteImport } from './routes/pedidos'
+import { Route as NotificacoesRouteImport } from './routes/notificacoes'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as FinanceiroRouteImport } from './routes/financeiro'
+import { Route as EstoqueRouteImport } from './routes/estoque'
+import { Route as ClientesRouteImport } from './routes/clientes'
+import { Route as BoletosRouteImport } from './routes/boletos'
+import { Route as AuditoriaRouteImport } from './routes/auditoria'
 import { Route as IndexRouteImport } from './routes/index'
 
+const RhRoute = RhRouteImport.update({
+  id: '/rh',
+  path: '/rh',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RelatoriosRoute = RelatoriosRouteImport.update({
+  id: '/relatorios',
+  path: '/relatorios',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProdutosRoute = ProdutosRouteImport.update({
+  id: '/produtos',
+  path: '/produtos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PontoRoute = PontoRouteImport.update({
+  id: '/ponto',
+  path: '/ponto',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PixRoute = PixRouteImport.update({
+  id: '/pix',
+  path: '/pix',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PedidosRoute = PedidosRouteImport.update({
+  id: '/pedidos',
+  path: '/pedidos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NotificacoesRoute = NotificacoesRouteImport.update({
+  id: '/notificacoes',
+  path: '/notificacoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FinanceiroRoute = FinanceiroRouteImport.update({
+  id: '/financeiro',
+  path: '/financeiro',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EstoqueRoute = EstoqueRouteImport.update({
+  id: '/estoque',
+  path: '/estoque',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClientesRoute = ClientesRouteImport.update({
+  id: '/clientes',
+  path: '/clientes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BoletosRoute = BoletosRouteImport.update({
+  id: '/boletos',
+  path: '/boletos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuditoriaRoute = AuditoriaRouteImport.update({
+  id: '/auditoria',
+  path: '/auditoria',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +97,214 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auditoria': typeof AuditoriaRoute
+  '/boletos': typeof BoletosRoute
+  '/clientes': typeof ClientesRoute
+  '/estoque': typeof EstoqueRoute
+  '/financeiro': typeof FinanceiroRoute
+  '/login': typeof LoginRoute
+  '/notificacoes': typeof NotificacoesRoute
+  '/pedidos': typeof PedidosRoute
+  '/pix': typeof PixRoute
+  '/ponto': typeof PontoRoute
+  '/produtos': typeof ProdutosRoute
+  '/relatorios': typeof RelatoriosRoute
+  '/rh': typeof RhRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auditoria': typeof AuditoriaRoute
+  '/boletos': typeof BoletosRoute
+  '/clientes': typeof ClientesRoute
+  '/estoque': typeof EstoqueRoute
+  '/financeiro': typeof FinanceiroRoute
+  '/login': typeof LoginRoute
+  '/notificacoes': typeof NotificacoesRoute
+  '/pedidos': typeof PedidosRoute
+  '/pix': typeof PixRoute
+  '/ponto': typeof PontoRoute
+  '/produtos': typeof ProdutosRoute
+  '/relatorios': typeof RelatoriosRoute
+  '/rh': typeof RhRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/auditoria': typeof AuditoriaRoute
+  '/boletos': typeof BoletosRoute
+  '/clientes': typeof ClientesRoute
+  '/estoque': typeof EstoqueRoute
+  '/financeiro': typeof FinanceiroRoute
+  '/login': typeof LoginRoute
+  '/notificacoes': typeof NotificacoesRoute
+  '/pedidos': typeof PedidosRoute
+  '/pix': typeof PixRoute
+  '/ponto': typeof PontoRoute
+  '/produtos': typeof ProdutosRoute
+  '/relatorios': typeof RelatoriosRoute
+  '/rh': typeof RhRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/auditoria'
+    | '/boletos'
+    | '/clientes'
+    | '/estoque'
+    | '/financeiro'
+    | '/login'
+    | '/notificacoes'
+    | '/pedidos'
+    | '/pix'
+    | '/ponto'
+    | '/produtos'
+    | '/relatorios'
+    | '/rh'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auditoria'
+    | '/boletos'
+    | '/clientes'
+    | '/estoque'
+    | '/financeiro'
+    | '/login'
+    | '/notificacoes'
+    | '/pedidos'
+    | '/pix'
+    | '/ponto'
+    | '/produtos'
+    | '/relatorios'
+    | '/rh'
+  id:
+    | '__root__'
+    | '/'
+    | '/auditoria'
+    | '/boletos'
+    | '/clientes'
+    | '/estoque'
+    | '/financeiro'
+    | '/login'
+    | '/notificacoes'
+    | '/pedidos'
+    | '/pix'
+    | '/ponto'
+    | '/produtos'
+    | '/relatorios'
+    | '/rh'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuditoriaRoute: typeof AuditoriaRoute
+  BoletosRoute: typeof BoletosRoute
+  ClientesRoute: typeof ClientesRoute
+  EstoqueRoute: typeof EstoqueRoute
+  FinanceiroRoute: typeof FinanceiroRoute
+  LoginRoute: typeof LoginRoute
+  NotificacoesRoute: typeof NotificacoesRoute
+  PedidosRoute: typeof PedidosRoute
+  PixRoute: typeof PixRoute
+  PontoRoute: typeof PontoRoute
+  ProdutosRoute: typeof ProdutosRoute
+  RelatoriosRoute: typeof RelatoriosRoute
+  RhRoute: typeof RhRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/rh': {
+      id: '/rh'
+      path: '/rh'
+      fullPath: '/rh'
+      preLoaderRoute: typeof RhRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/relatorios': {
+      id: '/relatorios'
+      path: '/relatorios'
+      fullPath: '/relatorios'
+      preLoaderRoute: typeof RelatoriosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/produtos': {
+      id: '/produtos'
+      path: '/produtos'
+      fullPath: '/produtos'
+      preLoaderRoute: typeof ProdutosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ponto': {
+      id: '/ponto'
+      path: '/ponto'
+      fullPath: '/ponto'
+      preLoaderRoute: typeof PontoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pix': {
+      id: '/pix'
+      path: '/pix'
+      fullPath: '/pix'
+      preLoaderRoute: typeof PixRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pedidos': {
+      id: '/pedidos'
+      path: '/pedidos'
+      fullPath: '/pedidos'
+      preLoaderRoute: typeof PedidosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/notificacoes': {
+      id: '/notificacoes'
+      path: '/notificacoes'
+      fullPath: '/notificacoes'
+      preLoaderRoute: typeof NotificacoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/financeiro': {
+      id: '/financeiro'
+      path: '/financeiro'
+      fullPath: '/financeiro'
+      preLoaderRoute: typeof FinanceiroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/estoque': {
+      id: '/estoque'
+      path: '/estoque'
+      fullPath: '/estoque'
+      preLoaderRoute: typeof EstoqueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/clientes': {
+      id: '/clientes'
+      path: '/clientes'
+      fullPath: '/clientes'
+      preLoaderRoute: typeof ClientesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/boletos': {
+      id: '/boletos'
+      path: '/boletos'
+      fullPath: '/boletos'
+      preLoaderRoute: typeof BoletosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auditoria': {
+      id: '/auditoria'
+      path: '/auditoria'
+      fullPath: '/auditoria'
+      preLoaderRoute: typeof AuditoriaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,6 +317,19 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuditoriaRoute: AuditoriaRoute,
+  BoletosRoute: BoletosRoute,
+  ClientesRoute: ClientesRoute,
+  EstoqueRoute: EstoqueRoute,
+  FinanceiroRoute: FinanceiroRoute,
+  LoginRoute: LoginRoute,
+  NotificacoesRoute: NotificacoesRoute,
+  PedidosRoute: PedidosRoute,
+  PixRoute: PixRoute,
+  PontoRoute: PontoRoute,
+  ProdutosRoute: ProdutosRoute,
+  RelatoriosRoute: RelatoriosRoute,
+  RhRoute: RhRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
