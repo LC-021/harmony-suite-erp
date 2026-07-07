@@ -1,0 +1,137 @@
+import { Link, useRouterState } from "@tanstack/react-router";
+import {
+  LayoutDashboard,
+  ShoppingCart,
+  QrCode,
+  Package,
+  Users,
+  Wallet,
+  FileText,
+  UserCog,
+  Clock,
+  Boxes,
+  Bell,
+  ShieldCheck,
+  BarChart3,
+  LogOut,
+  Building2,
+} from "lucide-react";
+
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+} from "@/components/ui/sidebar";
+
+const groups = [
+  {
+    label: "Visão geral",
+    items: [
+      { title: "Dashboard", url: "/", icon: LayoutDashboard },
+    ],
+  },
+  {
+    label: "Operação",
+    items: [
+      { title: "Pedidos", url: "/pedidos", icon: ShoppingCart },
+      { title: "Pix", url: "/pix", icon: QrCode },
+      { title: "Produtos", url: "/produtos", icon: Package },
+      { title: "Clientes", url: "/clientes", icon: Users },
+      { title: "Estoque", url: "/estoque", icon: Boxes },
+    ],
+  },
+  {
+    label: "Financeiro",
+    items: [
+      { title: "Caixa", url: "/financeiro", icon: Wallet },
+      { title: "Boletos", url: "/boletos", icon: FileText },
+    ],
+  },
+  {
+    label: "Pessoas",
+    items: [
+      { title: "RH", url: "/rh", icon: UserCog },
+      { title: "Ponto Eletrônico", url: "/ponto", icon: Clock },
+    ],
+  },
+  {
+    label: "Sistema",
+    items: [
+      { title: "Notificações", url: "/notificacoes", icon: Bell },
+      { title: "Auditoria", url: "/auditoria", icon: ShieldCheck },
+      { title: "Relatórios", url: "/relatorios", icon: BarChart3 },
+    ],
+  },
+];
+
+export function AppSidebar() {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const isActive = (url: string) => (url === "/" ? pathname === "/" : pathname.startsWith(url));
+
+  return (
+    <Sidebar collapsible="icon">
+      <SidebarHeader className="border-b border-sidebar-border">
+        <div className="flex items-center gap-2 px-2 py-3">
+          <div className="flex h-9 w-9 items-center justify-center rounded-md bg-gradient-primary shadow-glow">
+            <Building2 className="h-5 w-5 text-primary-foreground" />
+          </div>
+          <div className="flex flex-col group-data-[collapsible=icon]:hidden">
+            <span className="text-sm font-semibold leading-none">Colchões & Cia</span>
+            <span className="text-xs text-muted-foreground">ERP Corporativo</span>
+          </div>
+        </div>
+      </SidebarHeader>
+
+      <SidebarContent>
+        {groups.map((g) => (
+          <SidebarGroup key={g.label}>
+            <SidebarGroupLabel>{g.label}</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {g.items.map((item) => (
+                  <SidebarMenuItem key={item.url}>
+                    <SidebarMenuButton asChild isActive={isActive(item.url)} tooltip={item.title}>
+                      <Link to={item.url}>
+                        <item.icon className="h-4 w-4" />
+                        <span>{item.title}</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        ))}
+      </SidebarContent>
+
+      <SidebarFooter className="border-t border-sidebar-border">
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild tooltip="Sair">
+              <Link to="/login">
+                <LogOut className="h-4 w-4" />
+                <span>Sair</span>
+              </Link>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+        <div className="flex items-center gap-2 px-2 py-2 group-data-[collapsible=icon]:hidden">
+          <div className="h-8 w-8 rounded-full bg-gradient-primary flex items-center justify-center text-xs font-semibold text-primary-foreground">
+            CE
+          </div>
+          <div className="flex flex-col text-xs">
+            <span className="font-medium">Carlos Executivo</span>
+            <span className="text-muted-foreground">CEO · Administrador</span>
+          </div>
+        </div>
+      </SidebarFooter>
+    </Sidebar>
+  );
+}
