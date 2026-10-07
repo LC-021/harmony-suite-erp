@@ -1,12 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Plus, Search, FileDown, MoreHorizontal } from "lucide-react";
+import { Plus, Search, FileDown, Pencil } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { PageHeader } from "@/components/page-header";
 import { StatusBadge } from "@/components/status-badge";
-import { pedidos, currency, type PedidoStatus } from "@/lib/mock-data";
+import { EditarPedidoDialog } from "@/components/editar-pedido-dialog";
+import { pedidos, currency, type PedidoStatus, type Pedido } from "@/lib/mock-data";
 
 const statusFilters: (PedidoStatus | "Todos")[] = [
   "Todos",
@@ -26,6 +27,7 @@ export const Route = createFileRoute("/pedidos")({
 function Pedidos() {
   const [q, setQ] = useState("");
   const [filtro, setFiltro] = useState<(typeof statusFilters)[number]>("Todos");
+  const [editando, setEditando] = useState<Pedido | null>(null);
 
   const filtered = pedidos.filter(
     (p) =>
@@ -97,8 +99,8 @@ function Pedidos() {
                     <td className="px-3 py-2.5 text-muted-foreground">{p.data}</td>
                     <td className="px-3 py-2.5"><StatusBadge status={p.status} /></td>
                     <td className="px-2 py-2.5">
-                      <Button size="icon" variant="ghost" className="h-7 w-7">
-                        <MoreHorizontal className="h-4 w-4" />
+                      <Button size="sm" variant="ghost" className="h-7" onClick={() => setEditando(p)}>
+                        <Pencil className="h-3.5 w-3.5 mr-1" /> Editar
                       </Button>
                     </td>
                   </tr>
@@ -111,6 +113,7 @@ function Pedidos() {
           </div>
         </CardContent>
       </Card>
+      <EditarPedidoDialog pedido={editando} onClose={() => setEditando(null)} />
     </div>
   );
 }

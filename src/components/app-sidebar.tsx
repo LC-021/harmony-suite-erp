@@ -15,6 +15,11 @@ import {
   BarChart3,
   LogOut,
   Building2,
+  Headset,
+  ShoppingBag,
+  PackageCheck,
+  Truck,
+  Undo2,
 } from "lucide-react";
 
 import {
@@ -45,6 +50,16 @@ const groups = [
       { title: "Produtos", url: "/produtos", icon: Package },
       { title: "Clientes", url: "/clientes", icon: Users },
       { title: "Estoque", url: "/estoque", icon: Boxes },
+      { title: "SAC", url: "/sac", icon: Headset },
+      { title: "Compras", url: "/compras", icon: ShoppingBag },
+    ],
+  },
+  {
+    label: "Logística",
+    items: [
+      { title: "Expedição", url: "/expedicao", icon: PackageCheck },
+      { title: "Logística", url: "/logistica", icon: Truck },
+      { title: "Logística Reversa", url: "/logistica-reversa", icon: Undo2 },
     ],
   },
   {
