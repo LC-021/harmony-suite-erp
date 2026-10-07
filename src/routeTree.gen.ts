@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SacRouteImport } from './routes/sac'
 import { Route as RhRouteImport } from './routes/rh'
 import { Route as RelatoriosRouteImport } from './routes/relatorios'
 import { Route as ProdutosRouteImport } from './routes/produtos'
@@ -16,14 +17,23 @@ import { Route as PontoRouteImport } from './routes/ponto'
 import { Route as PixRouteImport } from './routes/pix'
 import { Route as PedidosRouteImport } from './routes/pedidos'
 import { Route as NotificacoesRouteImport } from './routes/notificacoes'
+import { Route as LogisticaReversaRouteImport } from './routes/logistica-reversa'
+import { Route as LogisticaRouteImport } from './routes/logistica'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as FinanceiroRouteImport } from './routes/financeiro'
+import { Route as ExpedicaoRouteImport } from './routes/expedicao'
 import { Route as EstoqueRouteImport } from './routes/estoque'
+import { Route as ComprasRouteImport } from './routes/compras'
 import { Route as ClientesRouteImport } from './routes/clientes'
 import { Route as BoletosRouteImport } from './routes/boletos'
 import { Route as AuditoriaRouteImport } from './routes/auditoria'
 import { Route as IndexRouteImport } from './routes/index'
 
+const SacRoute = SacRouteImport.update({
+  id: '/sac',
+  path: '/sac',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RhRoute = RhRouteImport.update({
   id: '/rh',
   path: '/rh',
@@ -59,6 +69,16 @@ const NotificacoesRoute = NotificacoesRouteImport.update({
   path: '/notificacoes',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LogisticaReversaRoute = LogisticaReversaRouteImport.update({
+  id: '/logistica-reversa',
+  path: '/logistica-reversa',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LogisticaRoute = LogisticaRouteImport.update({
+  id: '/logistica',
+  path: '/logistica',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
@@ -69,9 +89,19 @@ const FinanceiroRoute = FinanceiroRouteImport.update({
   path: '/financeiro',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ExpedicaoRoute = ExpedicaoRouteImport.update({
+  id: '/expedicao',
+  path: '/expedicao',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EstoqueRoute = EstoqueRouteImport.update({
   id: '/estoque',
   path: '/estoque',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComprasRoute = ComprasRouteImport.update({
+  id: '/compras',
+  path: '/compras',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ClientesRoute = ClientesRouteImport.update({
@@ -100,9 +130,13 @@ export interface FileRoutesByFullPath {
   '/auditoria': typeof AuditoriaRoute
   '/boletos': typeof BoletosRoute
   '/clientes': typeof ClientesRoute
+  '/compras': typeof ComprasRoute
   '/estoque': typeof EstoqueRoute
+  '/expedicao': typeof ExpedicaoRoute
   '/financeiro': typeof FinanceiroRoute
   '/login': typeof LoginRoute
+  '/logistica': typeof LogisticaRoute
+  '/logistica-reversa': typeof LogisticaReversaRoute
   '/notificacoes': typeof NotificacoesRoute
   '/pedidos': typeof PedidosRoute
   '/pix': typeof PixRoute
@@ -110,15 +144,20 @@ export interface FileRoutesByFullPath {
   '/produtos': typeof ProdutosRoute
   '/relatorios': typeof RelatoriosRoute
   '/rh': typeof RhRoute
+  '/sac': typeof SacRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auditoria': typeof AuditoriaRoute
   '/boletos': typeof BoletosRoute
   '/clientes': typeof ClientesRoute
+  '/compras': typeof ComprasRoute
   '/estoque': typeof EstoqueRoute
+  '/expedicao': typeof ExpedicaoRoute
   '/financeiro': typeof FinanceiroRoute
   '/login': typeof LoginRoute
+  '/logistica': typeof LogisticaRoute
+  '/logistica-reversa': typeof LogisticaReversaRoute
   '/notificacoes': typeof NotificacoesRoute
   '/pedidos': typeof PedidosRoute
   '/pix': typeof PixRoute
@@ -126,6 +165,7 @@ export interface FileRoutesByTo {
   '/produtos': typeof ProdutosRoute
   '/relatorios': typeof RelatoriosRoute
   '/rh': typeof RhRoute
+  '/sac': typeof SacRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -133,9 +173,13 @@ export interface FileRoutesById {
   '/auditoria': typeof AuditoriaRoute
   '/boletos': typeof BoletosRoute
   '/clientes': typeof ClientesRoute
+  '/compras': typeof ComprasRoute
   '/estoque': typeof EstoqueRoute
+  '/expedicao': typeof ExpedicaoRoute
   '/financeiro': typeof FinanceiroRoute
   '/login': typeof LoginRoute
+  '/logistica': typeof LogisticaRoute
+  '/logistica-reversa': typeof LogisticaReversaRoute
   '/notificacoes': typeof NotificacoesRoute
   '/pedidos': typeof PedidosRoute
   '/pix': typeof PixRoute
@@ -143,6 +187,7 @@ export interface FileRoutesById {
   '/produtos': typeof ProdutosRoute
   '/relatorios': typeof RelatoriosRoute
   '/rh': typeof RhRoute
+  '/sac': typeof SacRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -151,9 +196,13 @@ export interface FileRouteTypes {
     | '/auditoria'
     | '/boletos'
     | '/clientes'
+    | '/compras'
     | '/estoque'
+    | '/expedicao'
     | '/financeiro'
     | '/login'
+    | '/logistica'
+    | '/logistica-reversa'
     | '/notificacoes'
     | '/pedidos'
     | '/pix'
@@ -161,15 +210,20 @@ export interface FileRouteTypes {
     | '/produtos'
     | '/relatorios'
     | '/rh'
+    | '/sac'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auditoria'
     | '/boletos'
     | '/clientes'
+    | '/compras'
     | '/estoque'
+    | '/expedicao'
     | '/financeiro'
     | '/login'
+    | '/logistica'
+    | '/logistica-reversa'
     | '/notificacoes'
     | '/pedidos'
     | '/pix'
@@ -177,15 +231,20 @@ export interface FileRouteTypes {
     | '/produtos'
     | '/relatorios'
     | '/rh'
+    | '/sac'
   id:
     | '__root__'
     | '/'
     | '/auditoria'
     | '/boletos'
     | '/clientes'
+    | '/compras'
     | '/estoque'
+    | '/expedicao'
     | '/financeiro'
     | '/login'
+    | '/logistica'
+    | '/logistica-reversa'
     | '/notificacoes'
     | '/pedidos'
     | '/pix'
@@ -193,6 +252,7 @@ export interface FileRouteTypes {
     | '/produtos'
     | '/relatorios'
     | '/rh'
+    | '/sac'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -200,9 +260,13 @@ export interface RootRouteChildren {
   AuditoriaRoute: typeof AuditoriaRoute
   BoletosRoute: typeof BoletosRoute
   ClientesRoute: typeof ClientesRoute
+  ComprasRoute: typeof ComprasRoute
   EstoqueRoute: typeof EstoqueRoute
+  ExpedicaoRoute: typeof ExpedicaoRoute
   FinanceiroRoute: typeof FinanceiroRoute
   LoginRoute: typeof LoginRoute
+  LogisticaRoute: typeof LogisticaRoute
+  LogisticaReversaRoute: typeof LogisticaReversaRoute
   NotificacoesRoute: typeof NotificacoesRoute
   PedidosRoute: typeof PedidosRoute
   PixRoute: typeof PixRoute
@@ -210,10 +274,18 @@ export interface RootRouteChildren {
   ProdutosRoute: typeof ProdutosRoute
   RelatoriosRoute: typeof RelatoriosRoute
   RhRoute: typeof RhRoute
+  SacRoute: typeof SacRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sac': {
+      id: '/sac'
+      path: '/sac'
+      fullPath: '/sac'
+      preLoaderRoute: typeof SacRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/rh': {
       id: '/rh'
       path: '/rh'
@@ -263,6 +335,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NotificacoesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/logistica-reversa': {
+      id: '/logistica-reversa'
+      path: '/logistica-reversa'
+      fullPath: '/logistica-reversa'
+      preLoaderRoute: typeof LogisticaReversaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/logistica': {
+      id: '/logistica'
+      path: '/logistica'
+      fullPath: '/logistica'
+      preLoaderRoute: typeof LogisticaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
@@ -277,11 +363,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FinanceiroRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/expedicao': {
+      id: '/expedicao'
+      path: '/expedicao'
+      fullPath: '/expedicao'
+      preLoaderRoute: typeof ExpedicaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/estoque': {
       id: '/estoque'
       path: '/estoque'
       fullPath: '/estoque'
       preLoaderRoute: typeof EstoqueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/compras': {
+      id: '/compras'
+      path: '/compras'
+      fullPath: '/compras'
+      preLoaderRoute: typeof ComprasRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/clientes': {
@@ -320,9 +420,13 @@ const rootRouteChildren: RootRouteChildren = {
   AuditoriaRoute: AuditoriaRoute,
   BoletosRoute: BoletosRoute,
   ClientesRoute: ClientesRoute,
+  ComprasRoute: ComprasRoute,
   EstoqueRoute: EstoqueRoute,
+  ExpedicaoRoute: ExpedicaoRoute,
   FinanceiroRoute: FinanceiroRoute,
   LoginRoute: LoginRoute,
+  LogisticaRoute: LogisticaRoute,
+  LogisticaReversaRoute: LogisticaReversaRoute,
   NotificacoesRoute: NotificacoesRoute,
   PedidosRoute: PedidosRoute,
   PixRoute: PixRoute,
@@ -330,6 +434,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProdutosRoute: ProdutosRoute,
   RelatoriosRoute: RelatoriosRoute,
   RhRoute: RhRoute,
+  SacRoute: SacRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
