@@ -19,6 +19,9 @@ import { AppSidebar } from "@/components/app-sidebar";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Toaster } from "@/components/ui/sonner";
+import { AuthProvider, useAuth } from "@/hooks/use-auth";
+import { canAccess } from "@/lib/permissions";
+import { useNavigate } from "@tanstack/react-router";
 
 function NotFoundComponent() {
   return (
@@ -113,6 +116,16 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function AppLayout() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const { loading, user, roles, nome } = useAuth();
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!loading && !user) navigate({ to: "/login", replace: true });
+  }, [loading, user, navigate]);
+  if (loading || !user) {
+    return <div className="flex min-h-screen items-center justify-center bg-background text-sm text-muted-foreground">Carregando…</div>;
+  }
+  const allowed = canAccess(roles, pathname);
+  const initials = (nome || "U").slice(0, 2).toUpperCase();
 
   return (
     <SidebarProvider>
@@ -138,12 +151,19 @@ function AppLayout() {
                 </Link>
               </Button>
               <div className="h-8 w-8 rounded-full bg-gradient-primary flex items-center justify-center text-xs font-semibold text-primary-foreground">
-                CE
+                {initials}
               </div>
             </div>
           </header>
           <main key={pathname} className="flex-1 p-4 md:p-6 animate-in fade-in duration-300">
-            <Outlet />
+            {allowed ? <Outlet /> : (
+              <div className="mx-auto max-w-md py-20 text-center">
+                <h1 className="text-xl font-semibold">Acesso restrito</h1>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  {roles.length === 0 ? "Sua conta ainda não tem um perfil. Peça ao CEO para liberar seu acesso." : "Seu perfil não tem permissão para este módulo."}
+                </p>
+              </div>
+            )}
           </main>
         </div>
       </div>
@@ -155,11 +175,13 @@ function AppLayout() {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const isAuthRoute = pathname === "/login";
+  const isAuthRoute = pathname === "/login" || pathname === "/reset-password";
 
   return (
     <QueryClientProvider client={queryClient}>
-      {isAuthRoute ? <Outlet /> : <AppLayout />}
+      <AuthProvider>
+        {isAuthRoute ? <><Outlet /><Toaster richColors position="top-right" /></> : <AppLayout />}
+      </AuthProvider>
     </QueryClientProvider>
   );
 }
