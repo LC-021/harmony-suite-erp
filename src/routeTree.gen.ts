@@ -26,8 +26,10 @@ import { Route as PixRouteImport } from './routes/pix'
 import { Route as PontoRouteImport } from './routes/ponto'
 import { Route as ProdutosRouteImport } from './routes/produtos'
 import { Route as RelatoriosRouteImport } from './routes/relatorios'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as RhRouteImport } from './routes/rh'
 import { Route as SacRouteImport } from './routes/sac'
+import { Route as UsuariosRouteImport } from './routes/usuarios'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -114,6 +116,11 @@ const RelatoriosRoute = RelatoriosRouteImport.update({
   path: '/relatorios',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RhRoute = RhRouteImport.update({
   id: '/rh',
   path: '/rh',
@@ -122,6 +129,11 @@ const RhRoute = RhRouteImport.update({
 const SacRoute = SacRouteImport.update({
   id: '/sac',
   path: '/sac',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UsuariosRoute = UsuariosRouteImport.update({
+  id: '/usuarios',
+  path: '/usuarios',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -143,8 +155,10 @@ export interface FileRoutesByFullPath {
   '/ponto': typeof PontoRoute
   '/produtos': typeof ProdutosRoute
   '/relatorios': typeof RelatoriosRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/rh': typeof RhRoute
   '/sac': typeof SacRoute
+  '/usuarios': typeof UsuariosRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -164,8 +178,10 @@ export interface FileRoutesByTo {
   '/ponto': typeof PontoRoute
   '/produtos': typeof ProdutosRoute
   '/relatorios': typeof RelatoriosRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/rh': typeof RhRoute
   '/sac': typeof SacRoute
+  '/usuarios': typeof UsuariosRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -186,8 +202,10 @@ export interface FileRoutesById {
   '/ponto': typeof PontoRoute
   '/produtos': typeof ProdutosRoute
   '/relatorios': typeof RelatoriosRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/rh': typeof RhRoute
   '/sac': typeof SacRoute
+  '/usuarios': typeof UsuariosRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -209,8 +227,10 @@ export interface FileRouteTypes {
     | '/ponto'
     | '/produtos'
     | '/relatorios'
+    | '/reset-password'
     | '/rh'
     | '/sac'
+    | '/usuarios'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -230,8 +250,10 @@ export interface FileRouteTypes {
     | '/ponto'
     | '/produtos'
     | '/relatorios'
+    | '/reset-password'
     | '/rh'
     | '/sac'
+    | '/usuarios'
   id:
     | '__root__'
     | '/'
@@ -251,8 +273,10 @@ export interface FileRouteTypes {
     | '/ponto'
     | '/produtos'
     | '/relatorios'
+    | '/reset-password'
     | '/rh'
     | '/sac'
+    | '/usuarios'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -273,8 +297,10 @@ export interface RootRouteChildren {
   PontoRoute: typeof PontoRoute
   ProdutosRoute: typeof ProdutosRoute
   RelatoriosRoute: typeof RelatoriosRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   RhRoute: typeof RhRoute
   SacRoute: typeof SacRoute
+  UsuariosRoute: typeof UsuariosRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -398,6 +424,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RelatoriosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/rh': {
       id: '/rh'
       path: '/rh'
@@ -410,6 +443,13 @@ declare module '@tanstack/react-router' {
       path: '/sac'
       fullPath: '/sac'
       preLoaderRoute: typeof SacRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/usuarios': {
+      id: '/usuarios'
+      path: '/usuarios'
+      fullPath: '/usuarios'
+      preLoaderRoute: typeof UsuariosRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -433,8 +473,10 @@ const rootRouteChildren: RootRouteChildren = {
   PontoRoute: PontoRoute,
   ProdutosRoute: ProdutosRoute,
   RelatoriosRoute: RelatoriosRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   RhRoute: RhRoute,
   SacRoute: SacRoute,
+  UsuariosRoute: UsuariosRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
