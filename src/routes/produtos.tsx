@@ -1,12 +1,31 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { Search, Plus, Package, Tag, Sparkles } from "lucide-react";
+import { Search, Plus, Tag, Sparkles } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { PageHeader } from "@/components/page-header";
 import { StatusBadge } from "@/components/status-badge";
 import { produtos, currency } from "@/lib/mock-data";
+import colchoes from "@/assets/produtos/colchoes.jpg";
+import box from "@/assets/produtos/box.jpg";
+import cabeceiras from "@/assets/produtos/cabeceiras.jpg";
+import poltronas from "@/assets/produtos/poltronas.jpg";
+
+const U = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=800&q=70`;
+const imagens: Record<string, { src: string; fallback: string }> = {
+  "Colchões": { src: colchoes, fallback: colchoes },
+  "Box": { src: box, fallback: box },
+  "Box Baú": { src: box, fallback: box },
+  "Cabeceiras": { src: cabeceiras, fallback: cabeceiras },
+  "Poltronas": { src: poltronas, fallback: poltronas },
+  "Bicamas": { src: U("photo-1505693416388-ac5ce068fe85"), fallback: box },
+  "Sofá Cama": { src: U("photo-1555041469-a586c61ea9bc"), fallback: poltronas },
+  "Sapateiras": { src: U("photo-1595428774223-ef52624120d2"), fallback: cabeceiras },
+  "Mesas de Cabeceira": { src: U("photo-1532372320572-cda25653a26d"), fallback: cabeceiras },
+  "Cama Pet": { src: U("photo-1541781774459-bb2af2f05b55"), fallback: colchoes },
+};
+const imgDe = (cat: string) => imagens[cat] ?? { src: colchoes, fallback: colchoes };
 
 export const Route = createFileRoute("/produtos")({
   head: () => ({ meta: [{ title: "Catálogo · Colchões & Cia" }] }),
@@ -73,7 +92,15 @@ function Produtos() {
           return (
             <Card key={p.id} className="shadow-card hover:border-primary/40 transition-colors overflow-hidden">
               <div className="aspect-video bg-gradient-surface flex items-center justify-center relative border-b border-border/60">
-                <Package className="h-12 w-12 text-muted-foreground/40" />
+                <img
+                  src={imgDe(p.categoria).src}
+                  alt={p.nome}
+                  loading="lazy"
+                  width={800}
+                  height={450}
+                  className="absolute inset-0 h-full w-full object-cover"
+                  onError={(e) => { const f = imgDe(p.categoria).fallback; if (e.currentTarget.src !== f) e.currentTarget.src = f; }}
+                />
                 {hasPromo && (
                   <span className="absolute top-2 right-2 rounded-full bg-gradient-primary px-2 py-0.5 text-[10px] font-semibold text-primary-foreground shadow-glow">
                     -{desconto}%
